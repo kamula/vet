@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form class="form-signin" method="POST">
+ {% csrf_token %}
+ 
+  <h1 class="h3 mb-3 font-weight-normal">login</h1>
+  
+  <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+ 
+  <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    {% for field in login_form %}
+        {% for error in login_form.field.errors %}
+        <p>
+            <small style="color: red;">{{error}}</small> 
+        </p>
+        {% endfor %} 
+    
+    {% endfor %}
+     
+    {% if login_form.non_field_errors %}
+        <div style="color:red;">
+        <p>{{login_form.non_field_errors}}</p>
+    </div>
+    {% endif %}
+
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+  <a class="p-2 text-dark" href="#">register</a>
+
+  
+</form>
+</body>
+
+</html>
