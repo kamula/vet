@@ -144,3 +144,4 @@ dmypy.json
 
 # profiling data
 .prof
+static/admin

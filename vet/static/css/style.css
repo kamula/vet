@@ -1,0 +1,11 @@
+#red {
+    width: 1px;
+    /* you could actually just change it to 0px */
+    margin: 100px auto;
+    background: red;
+}
+
+#blue {
+    width: 200px;
+    background: blue;
+}
