@@ -25,6 +25,27 @@ def registration_view(request):
         context['registrationform'] = form
     return render(request, 'accounts/register.html', context)
 
+# Add user view
+@login_required(login_url='login')
+def add_user(request):
+    context = {
+        "counties":counties
+    }
+    if request.POST:
+        form = userregistration(request.POST)
+        if form.is_valid():
+            form.save()
+            email = form.cleaned_data.get('email')
+            raw_password = form.cleaned_data.get('password')
+            account = authenticate(email=email, password=raw_password)
+            return redirect('dashboard')
+        else:
+            context['registrationform'] = form
+    else:
+        form = userregistration()
+        context['registrationform'] = form
+    return render(request, 'accounts/adduser.html', context)
+
 
 # login view
 def login_view(request):
