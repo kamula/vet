@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from .forms import AccountAuthentication, userregistration
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .counties import counties
 from .models import Users
 # registration view
@@ -67,8 +68,11 @@ def login_view(request):
                 login(request, user)
                 # redirect to dashboard if user is
                 return redirect('users')
+        else:
+            messages.error(request,'username or password not correct')
+            return redirect('login')
     else:
-        form = AccountAuthentication
+        form = AccountAuthentication()
     context['login_form'] = form
     return render(request, 'accounts/login.html')
 
