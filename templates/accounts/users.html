@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+.users_table{
+    margin-left: 230px; 
+    
+}
+#officers{
+    margin-left:80px;
+}
+th, td {
+    padding: 10px;
+}
+a{
+    text-decoration:none
+}
+</style>
+<div class = "users_table">
+<h1 id = "officers">Veterinary officers</h1>
+<table>
+    <tr>
+        <th>name</th>
+        <th>email</th>
+        <th>county</th>
+        <th>phone number</th>
+        <th>edit</th>
+    </tr>
+    {% for user in users %}
+        <tr>
+            <td> <a href="#"> {{ user.name }} </a></td>
+            <td> <a href="#"> {{ user.email }} </a></td>
+            <td> {{ user.county }}</td>
+            <td> {{ user.phone_number }}</td>
+            <td> <a href="#"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a></td>
+        </tr>
+    {% endfor %}
+</table>
+</div>
+{% endblock content %}

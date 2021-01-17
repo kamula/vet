@@ -1,7 +1,7 @@
 #red {
     width: 1px;
     /* you could actually just change it to 0px */
-    margin: 100px auto;
+    margin: 10px auto;
     background: red;
 }
 
