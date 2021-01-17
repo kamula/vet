@@ -94,18 +94,23 @@
         <input type="password" name="password1" id="inputpassword" class="form-control" placeholder="password" required autofocus>
 
         <label for="password2"><b>Confirm password</b></label>
-        <input type="password" name="password2" id="inputPassword2" class="form-control" placeholder="confirm Password" required> {% for field in registrationform %} {% for error in registrationform.field.errors %}
-        <p>
-            <small style="color: red;">{{error}}</small>
-        </p>
-        {% endfor %} {% endfor %} {% if registrationform.non_field_errors %}
-        <div style="color:red;">
-            <p>{{registrationform.non_field_errors}}</p>
+        <input type="password" name="password2" id="inputPassword2" class="form-control" placeholder="confirm Password" required>
+         
+        {% for field in registrationform %}
+					{% if field.errors %}
+                    <small style="color: red;">{{ field.label }}: {{ field.errors|striptags }}</small>
+                    {% endif %}
+		{% endfor %}
+
+        <div class="container">
+      <div class="row">
+        <div class="col text-center">
+          <button class="btn btn-success" type="submit">Sign up</button>
         </div>
-        {% endif %}
+     </div>
+    </div>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
-
+        <a class="p-2 text-dark" href="{% url 'login' %}">already have an account? login</a>
     </form>
 </body>
 

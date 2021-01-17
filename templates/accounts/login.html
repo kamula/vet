@@ -24,33 +24,22 @@
  
  <label for="password">Password</label>
   <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-    {% for field in login_form %}
-        {% for error in login_form.field.errors %}
-        <p>
-            <small style="color: red;">{{error}}</small> 
-        </p>
-        {% endfor %} 
-    
-    {% endfor %}
-     
-    {% if login_form.non_field_errors %}
-        <div style="color:red;">
-        <p>{{login_form.non_field_errors}}</p>
-    </div>
-    {% endif %}
+    {% for message in messages %}
+                    <small style="color: red;">{{ message }}</small>
+      {% endfor %}
     <div class="container">
-  <div class="row">
-    <div class="col text-center">
-      <button class="btn btn-success" type="submit">Log in</button>
+      <div class="row">
+        <div class="col text-center">
+          <button class="btn btn-success" type="submit">Log in</button>
+        </div>
+     </div>
     </div>
-  </div>
-</div>
 
   
   
  
 
-  <a class="p-2 text-dark" href="#">don't have an account? register</a>
+  <a class="p-2 text-dark" href="{% url 'register' %}">don't have an account? register</a>
 </form>
  
 </body>
