@@ -33,6 +33,7 @@ a{
             <td> {{ user.county }}</td>
             <td> {{ user.phone_number }}</td>
             <td> <a href="#"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a></td>
+            <td><input onclick="location.href='{% url 'deactivate' user.email %}'" class='btn btn-danger' type='button' value='Deactivate'/></td>
         </tr>
     {% endfor %}
 </table>

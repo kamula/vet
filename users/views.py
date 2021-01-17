@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from .forms import AccountAuthentication, userregistration
 from django.contrib.auth.decorators import login_required
@@ -27,9 +28,8 @@ def registration_view(request):
         context['registrationform'] = form
     return render(request, 'accounts/register.html', context)
 
+
 # Add user view
-
-
 @login_required(login_url='login')
 def add_user(request):
     context = {
@@ -69,30 +69,42 @@ def login_view(request):
                 # redirect to dashboard if user is
                 return redirect('users')
         else:
-            messages.error(request,'username or password not correct')
+            messages.error(request, 'username or password not correct')
             return redirect('login')
     else:
         form = AccountAuthentication()
     context['login_form'] = form
     return render(request, 'accounts/login.html')
 
+
 # logout view
-
-
 def logout_view(request):
     logout(request)
     return redirect('login')
 
 # users
 # redirect to login page if user is not logged in
+
+
 @login_required(login_url='login')
 def users_view(request):
-    users = Users.objects.order_by("-date_joined").exclude(is_superuser=True)
+    # load only active users and exclude admin
+    users = Users.objects.order_by(
+        "-date_joined").filter(is_active=True).exclude(is_superuser=True)
     context = {
         "users": users
     }
     return render(request, "accounts/users.html", context)
 
+# deactivate user
+
+# Deactivate user
+def deactivate(request, email):
+    obj, created = Users.objects.update_or_create(
+        email=email,
+        defaults={"is_active":False},
+    )
+    return redirect('users')
 # Dashboard
 
 
