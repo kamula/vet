@@ -1,9 +1,25 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from .forms import AccountAuthentication, userregistration
+from django.contrib.auth.decorators import login_required
 # registration view
-# def registration_view(request):
-#     return
+def registration_view(request):
+    context = {}
+    if request.POST:
+        form = userregistration(request.POST)
+        if form.is_valid():
+            form.save()
+            email = form.cleaned_data.get('email')
+            raw_password = form.cleaned_data.get('password')
+            account = authenticate(email=email,password = raw_password)
+            login(request,account)
+            return redirect('login')
+        else:
+            context['registrationform'] = form
+    else:
+        form = userregistration()
+        context['registrationform'] = form
+    return render(request,'accounts/register.html',context)
 
 
 # login view
@@ -29,9 +45,12 @@ def login_view(request):
     return render(request, 'accounts/login.html')
 
 # logout view
-
+def logout_view(request):
+    logout(request)
+    return redirect('login')
 
 
 # Dashboard
+@login_required(login_url='login')
 def dashboard(request):
     return render(request, 'accounts/dashboard.html')
