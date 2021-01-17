@@ -2,11 +2,14 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from .forms import AccountAuthentication, userregistration
 from django.contrib.auth.decorators import login_required
+from .counties import counties
 # registration view
 
 
 def registration_view(request):
-    context = {}
+    context = {
+        "counties":counties
+    }
     if request.POST:
         form = userregistration(request.POST)
         if form.is_valid():

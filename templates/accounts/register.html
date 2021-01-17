@@ -43,10 +43,18 @@
             border-top-left-radius: 0;
             border-top-right-radius: 0;
         }
+        .form-signin select {
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            width: 150px;
+            margin: 10px;
+        }
         
         .h3 {
             text-align: center;
         }
+        
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,8 +73,16 @@
         <label for="name"><b>full name</b></label>
         <input type="text" name="name" id="inputFullname" class="form-control" placeholder="full name" required autofocus>
 
-        <label for="county"><b>County</b></label>
-        <input type="text" name="county" id="inputUsername" class="form-control" placeholder="county" required autofocus>
+        {% comment %} <label for="county"><b>County</b></label> {% endcomment %}
+        <p>
+             <label for="county"><b>Select county: </b></label>
+             <select id = "myList" name="county">
+               {% for county in counties %}
+                 <option value = "{{ county.name }}">{{ county.name }}</option>
+               {% endfor %}
+             </select>
+          </p>
+        {% comment %} <input type="text" name="county" id="inputUsername" class="form-control" placeholder="county" required autofocus> {% endcomment %}
 
         <label for="id_no"><b>ID Number</b></label>
         <input type="text" name="id_no" id="inputUsername" class="form-control" placeholder="id number" required autofocus>
