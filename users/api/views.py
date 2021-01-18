@@ -1,3 +1,4 @@
+from decimal import Context
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
@@ -38,8 +39,17 @@ def active_officers(request):
 # Deactivate officer
 @api_view(['PUT',])
 @permission_classes((IsAuthenticated,))
-def deactivate(request):
-    return Response("deactivated user")
+def deactivate(request,id):
+    obj, created = Users.objects.update_or_create(
+        pk=id,
+        defaults={"is_active": False},
+    )
+    context = {
+        "status":"success",
+        "message":"deactivated"
+    }
+    return Response(context)
+
 
 # update veterinary details
 @api_view(['PUT',])
