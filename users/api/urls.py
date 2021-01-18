@@ -9,6 +9,6 @@ urlpatterns = [
     path('login',obtain_auth_token,name='api_login'),
     path('users',active_officers,name='active_officers'),
     path('users/deactivate/<int:id>',deactivate,name='api_deactivate'),
-    path('update',update_view,name='api_update')
+    path('users/update/<int:id>',update_view,name='api_update')
 ]
 
