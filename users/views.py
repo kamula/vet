@@ -96,18 +96,48 @@ def users_view(request):
     }
     return render(request, "accounts/users.html", context)
 
-# deactivate user
 
 # Deactivate user
+@login_required(login_url='login')
 def deactivate(request, email):
     obj, created = Users.objects.update_or_create(
         email=email,
-        defaults={"is_active":False},
+        defaults={"is_active": False},
     )
     return redirect('users')
+
+
+# edit single user
+@login_required(login_url='login')
+def edit_user(request, id):
+    user = get_object_or_404(Users, pk=id)
+    context = {
+        "user": user,
+        "counties": counties
+    }
+    return render(request, 'accounts/user.html', context)
+
+# update user
+
+
+def user_update(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        name = request.POST['name']
+        county = request.POST['county']
+        id_no = request.POST['id_no']
+        phone_number = request.POST['phone_number']
+        obj, created = Users.objects.update_or_create(
+            email=email,
+            defaults={"name": name, "county": county,
+                      "id_no": id_no, "phone_number": phone_number},
+        )
+        print(name)
+        return redirect('users')
+    return redirect('users')
+
+
 # Dashboard
-
-
 @login_required(login_url='login')
 def dashboard(request):
     return render(request, 'accounts/dashboard.html')

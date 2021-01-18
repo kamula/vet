@@ -28,11 +28,11 @@ a{
     </tr>
     {% for user in users %}
         <tr>
-            <td> <a href="#"> {{ user.name }} </a></td>
-            <td> <a href="#"> {{ user.email }} </a></td>
+            <td> <a href="{% url 'edit_user' user.id %}"> {{ user.name }} </a></td>
+            <td> <a href="{% url 'edit_user' user.id %}"> {{ user.email }} </a></td>
             <td> {{ user.county }}</td>
             <td> {{ user.phone_number }}</td>
-            <td> <a href="#"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a></td>
+            <td> <a href="{% url 'edit_user' user.id %}"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a></td>
             <td><input onclick="location.href='{% url 'deactivate' user.email %}'" class='btn btn-danger' type='button' value='Deactivate'/></td>
         </tr>
     {% endfor %}
