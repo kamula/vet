@@ -1,5 +1,6 @@
 from django.urls import path, include
-from .views import dashboard, login_view, registration_view, logout_view, add_user, users_view, deactivate, edit_user, user_update
+from .views import (dashboard, login_view, registration_view, logout_view,
+                    add_user, users_view, deactivate, edit_user, user_update)
 
 urlpatterns = [
     path('', login_view, name='login'),
