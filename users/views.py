@@ -132,7 +132,6 @@ def user_update(request):
             defaults={"name": name, "county": county,
                       "id_no": id_no, "phone_number": phone_number},
         )
-        print(name)
         return redirect('users')
     return redirect('users')
 
