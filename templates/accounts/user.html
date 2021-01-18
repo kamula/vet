@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+.form-signin{  
+  margin-bottom: 100px;  
+  margin-left: 230px; 
+  margin-right: 10px;  
+ 
+  padding: 15px;
+          
+}
+button{
+     margin-top:10px
+}
+p{
+     margin-top:10px
+}
+</style>
+<form class="form-signin" action = "{% url 'update_user' %}" method="POST">
+        {% csrf_token %}
+
+        <h1 class="h3 mb-3 font-weight-bold">Add user</h1>
+        <label for="email"><b>Email</b></label>
+        <input type="email" name="email" id="inputEmail" class="form-control" value = "{{user.email}}" readonly="readonly" required autofocus>
+
+        <label for="name"><b>full name</b></label>
+        <input type="text" name="name" id="inputFullname" class="form-control" value = "{{user.name}}" required autofocus>
+
+        {% comment %} <label for="county"><b>County</b></label> {% endcomment %}
+        <p>
+             <label for="county"><b>Select county: </b></label>
+             <select id = "myList" name="county">
+               {% for county in counties %}
+                 <option value = "{{ county.name }}">{{ county.name }}</option>
+               {% endfor %}
+             </select>
+          </p>
+        {% comment %} <input type="text" name="county" id="inputUsername" class="form-control" placeholder="county" required autofocus> {% endcomment %}
+
+        <label for="id_no"><b>ID Number</b></label>
+        <input type="text" name="id_no" id="inputUsername" class="form-control" value = "{{user.id_no}}" required autofocus>
+
+        <label for="phone_number"><b>Phone Number</b></label>
+        <input type="text" name="phone_number" id="inputPhonenumber" class="form-control" value = "{{user.phone_number}}" required autofocus>
+     
+       
+
+        <div class="container">
+      <div class="row">
+        <div class="col text-center">
+          <button  class="btn btn-success" type="submit">update details</button>
+        </div>
+     </div>
+    </div>
+
+        
+    </form>
+
+{% endblock content %}
