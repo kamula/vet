@@ -8,7 +8,7 @@ class UserSerializer(serializers.ModelSerializer):
         style={'input_type': 'password'}, write_only=True)
 
     class Meta:
-        Model = Users
+        model = Users
         fields = ('name', 'email', 'county', 'id_no',
                   'phone_number', 'password', 'password2')
         extra_kwargs = {
@@ -24,7 +24,7 @@ class UserSerializer(serializers.ModelSerializer):
             phone_number=self.validated_data['phone_number']
 
         )
-        password = self.validated_data['password1']
+        password = self.validated_data['password']
         password2 = self.validated_data['password2']
         if password != password2:
             raise serializers.ValidationError(
