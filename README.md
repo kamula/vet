@@ -1,5 +1,5 @@
 # vet
-Django dashboard to do the tasks below:
+Django dashboard to do the tasks listed below using PostgreSQL:
 
   Login page  
   
