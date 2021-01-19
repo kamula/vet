@@ -1,16 +1,12 @@
 # vet
 Django dashboard to do the tasks below:
 
-  Login page
+  Login page  
   
+  List of veterinary officers  
   
-  List of veterinary officers
+  Onboard a veterinary officer  
   
-  
-  Onboard a veterinary officer
-  
-  
-  Update a veterinary officer's information
-  
+  Update a veterinary officer's information  
   
   Deactivate a veterinary officer
