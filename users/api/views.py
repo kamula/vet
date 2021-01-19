@@ -1,10 +1,7 @@
-from decimal import Context
-from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.serializers import Serializer
 from users.models import Users
 
 from users.api.serializers import UserSerializer
@@ -18,7 +15,7 @@ def registration_view(request):
     response = {}
     if serializer.is_valid():
         account = serializer.save()
-        token = Token.objects.create(user=account)
+        # token = Token.objects.create(user=account)
         response['status'] = 'success'
         response['message'] = 'account registered successfully'
         # response['token'] = token.key
